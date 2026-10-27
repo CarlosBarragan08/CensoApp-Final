@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CensoApp.Views.FormularioPage"
+             Title="Registrar Establecimiento"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#121214}">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- SECCIÓN 1: DATOS GENERALES -->
+            <Label Text="1. DATOS GENERALES" FontSize="16" FontAttributes="Bold" TextColor="#F59E0B" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Nombre Comercial *:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtNombreComercial" Placeholder="Nombre del establecimiento" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Razón Social:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtRazonSocial" Placeholder="Razón social o nombre del propietario" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Tipo Documento:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckTipoDocumento" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>NIT</x:String>
+                                <x:String>CÉDULA DE CIUDADANÍA</x:String>
+                                <x:String>CÉDULA DE EXTRANJERÍA</x:String>
+                                <x:String>PASAPORTE</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Número Documento:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtNumeroDocumento" Placeholder="NIT / Cédula" Keyboard="Text" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="N° Inscripción:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtInscripcion" Placeholder="N° de Inscripción" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Representante Legal:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtRepresentante" Placeholder="Nombre del representante" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Tipo Sujeto:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckTipoSujeto" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>PERSONA NATURAL</x:String>
+                                <x:String>PERSONA JURÍDICA</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Estado:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckEstado" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>ACTIVO</x:String>
+                                <x:String>INACTIVO / CERRADO</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- SECCIÓN 2: UBICACIÓN Y CONTACTO -->
+            <Label Text="2. UBICACIÓN Y CONTACTO" FontSize="16" FontAttributes="Bold" TextColor="#F59E0B" Margin="0,8,0,0" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Dirección:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtDireccion" Placeholder="Dirección exacta" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="2*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Municipio:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckMunicipio" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" SelectedIndexChanged="OnMunicipioSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>SINCELEJO</x:String>
+                                <x:String>COROZAL</x:String>
+                                <x:String>BUENAVISTA</x:String>
+                                <x:String>CAIMITO</x:String>
+                                <x:String>COLOSO</x:String>
+                                <x:String>COVEÑAS</x:String>
+                                <x:String>EL ROBLE</x:String>
+                                <x:String>GALERAS</x:String>
+                                <x:String>GUARANDA</x:String>
+                                <x:String>LA UNIÓN</x:String>
+                                <x:String>LOS PALMITOS</x:String>
+                                <x:String>MAJAGUAL</x:String>
+                                <x:String>MORROA</x:String>
+                                <x:String>OVEJAS</x:String>
+                                <x:String>PALMITO</x:String>
+                                <x:String>SAMPUÉS</x:String>
+                                <x:String>SAN BENITO ABAD</x:String>
+                                <x:String>SAN JUAN DE BETULIA</x:String>
+                                <x:String>SAN MARCOS</x:String>
+                                <x:String>SAN ONOFRE</x:String>
+                                <x:String>SAN PEDRO</x:String>
+                                <x:String>SINCÉ</x:String>
+                                <x:String>SUCRE</x:String>
+                                <x:String>TOLÚ</x:String>
+                                <x:String>TOLÚ VIEJO</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Cód. Divipola:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtDivipolaMuni" IsReadOnly="True" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#2E2E38}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="2*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Departamento:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckDepartamento" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" SelectedIndexChanged="OnDepartamentoSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>SUCRE</x:String>
+                                <x:String>BOLÍVAR</x:String>
+                                <x:String>CÓRDOBA</x:String>
+                                <x:String>ATLÁNTICO</x:String>
+                                <x:String>MAGDALENA</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Cód. Divipola:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtDivipolaDpto" IsReadOnly="True" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#2E2E38}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Área:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckArea" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>RURAL</x:String>
+                                <x:String>URBANA</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Teléfono:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Entry x:Name="TxtTelefono" Placeholder="Teléfono / Celular" Keyboard="Telephone" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Correo Electrónico:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtCorreo" Placeholder="correo@ejemplo.com" Keyboard="Email" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <!-- SECCIÓN 3: CLASIFICACIÓN DEL ESTABLECIMIENTO -->
+            <Label Text="3. CLASIFICACIÓN Y ACTIVIDAD" FontSize="16" FontAttributes="Bold" TextColor="#F59E0B" Margin="0,8,0,0" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Actividad Principal:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Picker x:Name="PckActividadPrincipal" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" SelectedIndexChanged="OnActividadPrincipalSelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>PREPARACIÓN ALIMENTOS</x:String>
+                            <x:String>COMEDORES</x:String>
+                            <x:String>EXPENDIO ALIMENTOS</x:String>
+                            <x:String>GRANDES SUPERFICIES</x:String>
+                            <x:String>ENSAMBLE ALIMENTOS</x:String>
+                            <x:String>ALMACENAMIENTO</x:String>
+                            <x:String>VENTA VÍA PÚBLICA</x:String>
+                            <x:String>EXPENDIO BEBIDAS ALCOHÓLICAS</x:String>
+                            <x:String>PLAZAS DE MERCADO</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Tipo de Establecimiento:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Picker x:Name="PckTipoEstablecimiento" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="Clasificación Riesgo:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckRiesgo" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>ALTO</x:String>
+                                <x:String>MEDIO</x:String>
+                                <x:String>BAJO</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="Decreto 1500:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckDec1500" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>NO APLICA</x:String>
+                                <x:String>SI</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Spacing="4" IsVisible="False">
+                <VerticalStackLayout.Triggers>
+                    <DataTrigger TargetType="VerticalStackLayout"
+                     Binding="{Binding Source={x:Reference PckDec1500}, Path=SelectedItem}"
+                     Value="SI">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </VerticalStackLayout.Triggers>
+
+                <Label Text="Nº / Fecha Res. Autorización:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtResAutorizacion" Placeholder="Número y Fecha de Resolución" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"/>
+            </VerticalStackLayout>
+
+            <!-- SECCIÓN 4: REGISTRO DE PRIMERA VISITA -->
+            <Label Text="4. DATOS DE PRIMERA VISITA" FontSize="16" FontAttributes="Bold" TextColor="#F59E0B" Margin="0,8,0,0" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Fecha Visita Inicial:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <DatePicker x:Name="DpFechaVisitaInicial" Format="dd/MM/yyyy" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Porcentaje de Cumplimiento (%):" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtPorcentajeInicial" Placeholder="0 a 100" Keyboard="Numeric" TextChanged="OnPorcentajeInicialTextChanged" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Concepto Sanitario (Autocalculado):" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#2E2E38}" Padding="12,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="6" />
+                    </Border.StrokeShape>
+                    <Label x:Name="LblConceptoInicialAuto" Text="PENDIENTE" FontAttributes="Bold" FontSize="14" TextColor="#64748B" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Inspectores / Funcionarios:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtFuncionariosInicial" Placeholder="Nombres de los inspectores" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Motivo de la Visita:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Picker x:Name="PckObjetivoInicial" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" SelectedIndexChanged="OnObjetivoInicialSelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>PROGRAMACIÓN</x:String>
+                            <x:String>SOLICITUD DEL INTERESADO</x:String>
+                            <x:String>ASOCIADA A PETICIONES, QUEJAS Y RECLAMOS</x:String>
+                            <x:String>SOLICITUD OFICIAL</x:String>
+                            <x:String>EVENTO DE INTERÉS EN SALUD PÚBLICA</x:String>
+                            <x:String>SOLICITUD DE PRÁCTICA DE PRUEBAS / PROCESOS SANCIONATORIOS ADMIN.</x:String>
+                            <x:String>OTRO</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="SeccionOtroObjetivoInicial" Spacing="4" IsVisible="False">
+                <Label Text="Especifique otro motivo:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtOtroObjetivoInicial" Placeholder="Escriba el motivo específico" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="4" Grid.Column="0">
+                    <Label Text="¿Tiene Denuncias?" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckDenunciasInicial" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>NO</x:String>
+                                <x:String>SI</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4" Grid.Column="1">
+                    <Label Text="¿Involucrado en ETA?" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                    <Picker x:Name="PckEtaInicial" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>NO</x:String>
+                                <x:String>SI</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- SECCIÓN DESPLEGABLE DE MEDIDAS SANITARIAS MÚLTIPLES (PRIMERA VISITA) -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Medida Sanitaria Aplicada:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+
+                <!-- Encabezado del Dropdown -->
+                <Border BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#2E2E38}" Padding="12,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="6" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnToggleMedidasInicialClicked"/>
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label x:Name="LblMedidasInicialSeleccionadas" Text="NO APLICA" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                        <Label Text="▼" FontSize="11" TextColor="{AppThemeBinding Light=#64748B, Dark=#A1A1AA}" Grid.Column="1" VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Panel Oculto con CheckBoxes -->
+                <Border x:Name="SeccionDesplegableMedidasInicial" IsVisible="False" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}" Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#2E2E38}" Padding="10" Margin="0,2,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="6" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkNoAplicaInicial" IsChecked="True" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="NO APLICA" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkClausuraTotalInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="CLAUSURA TEMPORAL TOTAL" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkClausuraParcialInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="CLAUSURA TEMPORAL PARCIAL" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkSuspensionParcialInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="SUSPENSIÓN PARCIAL DE TRABAJOS O SERVICIOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkSuspensionTotalInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="SUSPENSIÓN TOTAL DE TRABAJOS O SERVICIOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkDecomisoInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="DECOMISO DE OOBJETOS Y PRODUCTOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkDestruccionInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="DESTRUCCIÓN DE ARTICULOS O PRODUCTOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkDesnaturalizacionInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="DESNATURALIZACIÓN DE ARTICULOS O PRODUCTOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkCongelacionTemporalInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="CONGELACIÓN TEMPORAL DE LA VENTA O EMPLEO DE PRODUCTOS Y OBJETOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkSuspensionTemporalVentaInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="SUSPENSIÓN TEMPORAL DE LA VENTA O EMPLEO DE PRODUCTOS Y OBJETOS" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkOtraMedidaInicial" CheckedChanged="OnMedidaInicialCheckedChanged"/>
+                            <Label Text="OTRA MEDIDA" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- CAMPO DINÁMICO PARA ESPECIFICAR OTRA MEDIDA SANITARIA -->
+            <VerticalStackLayout x:Name="SeccionOtraMedidaInicial" Spacing="4" IsVisible="False">
+                <Label Text="Especifique otra medida sanitaria:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Entry x:Name="TxtOtraMedidaInicial" Placeholder="Escriba la medida sanitaria" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <!-- DOCUMENTO ADJUNTO (ACTA IVC, INSCRIPCIÓN, ETC.) -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Documento Adjunto (Acta IVC, Inscripción, etc.):" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                    <Entry x:Name="TxtDocumentoAdjunto" IsReadOnly="True" Placeholder="Ningún archivo seleccionado (puedes elegir varios)" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+                    <Button Grid.Column="1" Text="Cargar Archivo" Clicked="OnSeleccionarDocumentoClicked" BackgroundColor="#3B82F6" TextColor="White" FontAttributes="Bold" CornerRadius="6" HeightRequest="44"/>
+                </Grid>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Observaciones:" FontSize="13" TextColor="{AppThemeBinding Light=#475569, Dark=#A1A1AA}"/>
+                <Editor x:Name="TxtObservacionesInicial" Placeholder="Escriba observaciones de la visita..." HeightRequest="80" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#52525B}" BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E22}"/>
+            </VerticalStackLayout>
+
+            <!-- BOTONES -->
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,10,0,20">
+                <Button Text="Cancelar" Clicked="OnCancelarClicked" BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#2E2E38}" TextColor="{AppThemeBinding Light=#0F172A, Dark=#F8FAFC}" FontAttributes="Bold" FontSize="15" CornerRadius="8" HeightRequest="48" Grid.Column="0"/>
+                <Button Text="Guardar Todo" Clicked="OnGuardarClicked" BackgroundColor="#22C55E" TextColor="White" FontAttributes="Bold" FontSize="15" CornerRadius="8" HeightRequest="48" Grid.Column="1"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

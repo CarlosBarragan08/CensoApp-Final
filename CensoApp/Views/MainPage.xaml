@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CensoApp.Models"
+             x:Class="CensoApp.Views.MainPage"
+             Title="Directorio Censo IVC"
+             BackgroundColor="#121214">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *" Padding="16" RowSpacing="12">
+
+        <!-- ENCABEZADO Y BOTONES -->
+        <Grid Grid.Row="0" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Establecimientos" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                <Label x:Name="LblTotalRegistros" Text="Mostrando 0 de 0 registros" FontSize="12" TextColor="Gray" />
+            </VerticalStackLayout>
+
+            <Button Grid.Column="1" Text="Exportar" Clicked="OnExportarClicked" BackgroundColor="#4CAF50" TextColor="White" FontAttributes="Bold" CornerRadius="8"/>
+            <Button Grid.Column="2" Text="+ Nuevo" Clicked="OnNuevoClicked" BackgroundColor="#2196F3" TextColor="White" FontAttributes="Bold" CornerRadius="8"/>
+        </Grid>
+
+        <!-- BARRA DE BÚSQUEDA -->
+        <SearchBar Grid.Row="1" x:Name="TxtBuscar" Placeholder="Buscar por Nombre, Documento o Razón Social..." TextChanged="OnFiltrosChanged" TextColor="White" PlaceholderColor="Gray"/>
+
+        <!-- FILTROS -->
+        <Grid Grid.Row="2" ColumnDefinitions="*, *, *" ColumnSpacing="10">
+            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                <Label Text="Municipio:" FontSize="11" TextColor="Gray"/>
+                <Picker x:Name="PickerFiltroMunicipio" SelectedIndexChanged="OnFiltrosChanged" TextColor="White"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                <Label Text="Concepto:" FontSize="11" TextColor="Gray"/>
+                <Picker x:Name="PickerFiltroConcepto" SelectedIndexChanged="OnFiltrosChanged" TextColor="White">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>TODOS</x:String>
+                            <x:String>FAVORABLE</x:String>
+                            <x:String>FAVORABLE CON REQUERIMIENTOS</x:String>
+                            <x:String>DESFAVORABLE</x:String>
+                            <x:String>SIN VISITA RECIENTE</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2" Spacing="2">
+                <Label Text="Riesgo:" FontSize="11" TextColor="Gray"/>
+                <Picker x:Name="PickerFiltroRiesgo" SelectedIndexChanged="OnFiltrosChanged" TextColor="White">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>TODOS</x:String>
+                            <x:String>ALTO</x:String>
+                            <x:String>MEDIO</x:String>
+                            <x:String>BAJO</x:String>
+                            <x:String>SIN CLASIFICAR</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- LISTA CON TARJETAS DINÁMICAS -->
+        <CollectionView Grid.Row="3" x:Name="ListaEstablecimientos" SelectionMode="Single" SelectionChanged="OnEstablecimientoSeleccionado">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Establecimiento">
+                    <Border Margin="0,0,0,10" Padding="14" BackgroundColor="#1E1E22" Stroke="#2E2E38" StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12"/>
+                        </Border.StrokeShape>
+
+                        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="6">
+
+                            <!-- Nombre Comercial y Razón Social -->
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="2">
+                                <Label Text="{Binding NombreComercial}" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="{Binding RazonSocial}" FontSize="13" TextColor="#A0A0AB"/>
+                            </VerticalStackLayout>
+
+                            <!-- Documento Dinámico -->
+                            <Label Grid.Row="0" Grid.Column="1" 
+                                   Text="{Binding DocumentoDisplay}" 
+                                   FontSize="12" TextColor="#8E8E93" 
+                                   HorizontalOptions="End" VerticalOptions="Start"/>
+
+                            <!-- Municipio y Tipo de Establecimiento -->
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="6">
+                                <Label Text="{Binding Municipio}" FontSize="12" FontAttributes="Bold" TextColor="#0284C7"/>
+                                <Label Text="|" TextColor="Gray" FontSize="12"/>
+                                <Label Text="{Binding TipoEstablecimiento}" FontSize="12" TextColor="#A0A0AB"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Porcentaje y Concepto Sanitario -->
+                            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                                <Border BackgroundColor="#0284C7" Padding="6,2" StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="4"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="{Binding PorcentajeCumplimiento, StringFormat='{0}%'}" FontSize="11" FontAttributes="Bold" TextColor="White"/>
+                                </Border>
+
+                                <Label Text="{Binding ConceptoSanitario}" FontSize="12" FontAttributes="Bold" TextColor="#9CA3AF" VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <!-- FAVORABLE -> Verde -->
+                                        <DataTrigger TargetType="Label" Binding="{Binding ConceptoSanitario}" Value="FAVORABLE">
+                                            <Setter Property="TextColor" Value="#22C55E" />
+                                        </DataTrigger>
+
+                                        <!-- FAVORABLE CON REQUERIMIENTOS -> Naranja -->
+                                        <DataTrigger TargetType="Label" Binding="{Binding ConceptoSanitario}" Value="FAVORABLE CON REQUERIMIENTOS">
+                                            <Setter Property="TextColor" Value="#F59E0B" />
+                                        </DataTrigger>
+
+                                        <!-- DESFAVORABLE -> Rojo -->
+                                        <DataTrigger TargetType="Label" Binding="{Binding ConceptoSanitario}" Value="DESFAVORABLE">
+                                            <Setter Property="TextColor" Value="#EF4444" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+
+                            <!-- Indicador de Nivel de Riesgo -->
+                            <Border Grid.Row="2" Grid.Column="1" BackgroundColor="#7C2D12" Padding="8,4" StrokeThickness="0" HorizontalOptions="End" VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="4"/>
+                                </Border.StrokeShape>
+                                <Label Text="{Binding TipoRiesgo, StringFormat='Riesgo: {0}'}" FontSize="11" FontAttributes="Bold" TextColor="#FDE68A"/>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
